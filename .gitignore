@@ -1,0 +1,15 @@
+# Credenciales de la base de datos (nunca se suben al repositorio)
+config.php
+
+# Logs
+*.log
+logs/
+
+# Configuración personal del editor
+.vscode/
+.idea/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
