@@ -29,7 +29,7 @@ CREATE TABLE tecnicos (
   nombre         VARCHAR(100) NOT NULL,
   email          VARCHAR(150) NOT NULL,
   tareas_activas INT UNSIGNED NOT NULL DEFAULT 0,
-  CONSTRAINT pk_tecnicos PRIMARY KEY (id),
+  PRIMARY KEY (id),
   CONSTRAINT uq_tecnicos_email UNIQUE (email),
   CONSTRAINT chk_tecnicos_tareas CHECK (tareas_activas <= 5)
 ) ENGINE=InnoDB;
@@ -49,7 +49,7 @@ CREATE TABLE incidencias (
   estado         ENUM('Pendiente', 'En Proceso', 'Resuelta') NOT NULL DEFAULT 'Pendiente',
   tecnico_id     INT UNSIGNED NULL DEFAULT NULL,
   fecha_creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT pk_incidencias PRIMARY KEY (id),
+  PRIMARY KEY (id),
   CONSTRAINT fk_incidencias_tecnico FOREIGN KEY (tecnico_id)
     REFERENCES tecnicos (id)
     ON DELETE SET NULL
