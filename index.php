@@ -11,8 +11,15 @@ declare(strict_types=1);
 require_once __DIR__ . '/conexion.php';
 
 // Consulta de las incidencias activas
+
 try {
-    $stmt = $pdo->prepare('SELECT id, titulo, prioridad, estado, tecnico_id FROM incidencias WHERE estado <> :estado');
+    $stmt = $pdo->prepare(
+        'SELECT incidencias.id, incidencias.titulo, incidencias.prioridad, incidencias.estado,
+                tecnicos.nombre AS tecnico
+         FROM incidencias
+         LEFT JOIN tecnicos ON incidencias.tecnico_id = tecnicos.id
+         WHERE incidencias.estado <> :estado'
+    );
     $stmt->execute(['estado' => 'Resuelta']);
     $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC); // Obtener los resultados como un array asociativo
 } catch (PDOException $e) {
@@ -60,7 +67,7 @@ try {
                         <td><?= htmlspecialchars((string) ($incidencia['titulo']), ENT_QUOTES, 'UTF-8') ?></td>
                         <td><?= htmlspecialchars((string) ($incidencia['prioridad']), ENT_QUOTES, 'UTF-8') ?></td>
                         <td><?= htmlspecialchars((string) ($incidencia['estado']), ENT_QUOTES, 'UTF-8') ?></td>
-                        <td><?= htmlspecialchars((string) ($incidencia['tecnico_id'] ?? 'No asignado'), ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= htmlspecialchars((string) ($incidencia['tecnico'] ?? 'No asignado'), ENT_QUOTES, 'UTF-8') ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
