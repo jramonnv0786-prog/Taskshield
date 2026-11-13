@@ -2,8 +2,6 @@
 // TaskShield - Panel principal
 // Muestra en una tabla todas las incidencias activas (no resueltas).
 
-// ===================== LÓGICA =====================
-
 // Tipado estricto
 declare(strict_types=1);
 
@@ -11,7 +9,6 @@ declare(strict_types=1);
 require_once __DIR__ . '/conexion.php';
 
 // Consulta de las incidencias activas
-
 try {
     $stmt = $pdo->prepare(
         'SELECT incidencias.id, incidencias.titulo, incidencias.prioridad, incidencias.estado,
@@ -27,11 +24,8 @@ try {
     die("Error al obtener las incidencias. Por favor, inténtalo más tarde.");
 }
 
-
-// ===================== VISTA =====================
 ?>
 
-<!-- Estructura de la página -->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -42,16 +36,17 @@ try {
 
 </head>
 
-
 <body>
     <header>
         <h1>Panel de Incidencias</h1>
     </header>
     <main>
         <table>
+            <!-- Agregar un caption para accesibilidad -->
             <caption>Incidencias Activas</caption>
             <thead>
                 <tr>
+                    <!-- Agregar scope a los encabezados de columna para accesibilidad -->
                     <th scope="col">ID</th>
                     <th scope="col">Título</th>
                     <th scope="col">Prioridad</th>
@@ -63,6 +58,7 @@ try {
                 <!-- Convertir a string y escapar caracteres especiales para prevenir XSS -->
                 <?php foreach ($incidencias as $incidencia): ?>
                     <tr>
+                        <!-- Escapar los valores para prevenir XSS y convertir a string -->
                         <td><?= htmlspecialchars((string) ($incidencia['id']), ENT_QUOTES, 'UTF-8') ?></td>
                         <td><?= htmlspecialchars((string) ($incidencia['titulo']), ENT_QUOTES, 'UTF-8') ?></td>
                         <td><?= htmlspecialchars((string) ($incidencia['prioridad']), ENT_QUOTES, 'UTF-8') ?></td>
