@@ -4,7 +4,6 @@
 
 -- Base de datos
 -- Se crea solo si no existe y se selecciona para trabajar en ella.
--- ---------------------------------------------------------
 CREATE DATABASE IF NOT EXISTS taskshield
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_spanish_ci;
@@ -12,9 +11,7 @@ CREATE DATABASE IF NOT EXISTS taskshield
 USE taskshield;
 
 -- Borrado de tablas (primero la hija, luego la madre)
--- incidencias depende de tecnicos por la clave foránea,
--- así que se borra antes.
-
+-- incidencias depende de tecnicos por la clave foránea, así que se borra antes.
 DROP TABLE IF EXISTS incidencias;
 DROP TABLE IF EXISTS tecnicos;
 

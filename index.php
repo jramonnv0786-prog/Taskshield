@@ -23,7 +23,7 @@ try {
     error_log("Error al obtener las incidencias: " . $e->getMessage());
     die("Error al obtener las incidencias. Por favor, inténtalo más tarde.");
 }
-
+$creada = filter_input(INPUT_GET, 'creada', FILTER_VALIDATE_INT);
 ?>
 
 <!DOCTYPE html>
@@ -41,6 +41,10 @@ try {
         <h1>Panel de Incidencias</h1>
     </header>
     <main>
+        <?php if ($creada): ?>
+            <p>Incidencia creada con éxito. ID: <?= htmlspecialchars((string) $creada, ENT_QUOTES, 'UTF-8') ?></p>
+        <?php endif; ?>
+        <a href="nueva_incidencia.php">Crear nueva incidencia</a>
         <table>
             <!-- Agregar un caption para accesibilidad -->
             <caption>Incidencias Activas</caption>
@@ -60,7 +64,7 @@ try {
                     <tr>
                         <!-- Escapar los valores para prevenir XSS y convertir a string -->
                         <td><?= htmlspecialchars((string) ($incidencia['id']), ENT_QUOTES, 'UTF-8') ?></td>
-                        <td><?= htmlspecialchars((string) ($incidencia['titulo']), ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><?= htmlspecialchars((string) ($incidencia['titulo']), ENT_QUOTES, 'UTF-8', false) ?></td>
                         <td><?= htmlspecialchars((string) ($incidencia['prioridad']), ENT_QUOTES, 'UTF-8') ?></td>
                         <td><?= htmlspecialchars((string) ($incidencia['estado']), ENT_QUOTES, 'UTF-8') ?></td>
                         <td><?= htmlspecialchars((string) ($incidencia['tecnico'] ?? 'No asignado'), ENT_QUOTES, 'UTF-8') ?></td>
