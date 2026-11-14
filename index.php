@@ -23,7 +23,10 @@ try {
     error_log("Error al obtener las incidencias: " . $e->getMessage());
     die("Error al obtener las incidencias. Por favor, inténtalo más tarde.");
 }
+
+// Avisos de alta y edición (ids recibidos por la URL)
 $creada = filter_input(INPUT_GET, 'creada', FILTER_VALIDATE_INT);
+$editada = filter_input(INPUT_GET, 'editada', FILTER_VALIDATE_INT);
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +47,9 @@ $creada = filter_input(INPUT_GET, 'creada', FILTER_VALIDATE_INT);
         <?php if ($creada): ?>
             <p>Incidencia creada con éxito. ID: <?= htmlspecialchars((string) $creada, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
+        <?php if ($editada): ?>
+            <p>Incidencia actualizada con éxito. ID: <?= htmlspecialchars((string) $editada, ENT_QUOTES, 'UTF-8') ?></p>
+        <?php endif; ?>
         <a href="nueva_incidencia.php">Crear nueva incidencia</a>
         <table>
             <!-- Agregar un caption para accesibilidad -->
@@ -56,18 +62,19 @@ $creada = filter_input(INPUT_GET, 'creada', FILTER_VALIDATE_INT);
                     <th scope="col">Prioridad</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Técnico</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Convertir a string y escapar caracteres especiales para prevenir XSS -->
                 <?php foreach ($incidencias as $incidencia): ?>
                     <tr>
-                        <!-- Escapar los valores para prevenir XSS y convertir a string -->
                         <td><?= htmlspecialchars((string) ($incidencia['id']), ENT_QUOTES, 'UTF-8') ?></td>
                         <td><?= htmlspecialchars((string) ($incidencia['titulo']), ENT_QUOTES, 'UTF-8', false) ?></td>
                         <td><?= htmlspecialchars((string) ($incidencia['prioridad']), ENT_QUOTES, 'UTF-8') ?></td>
                         <td><?= htmlspecialchars((string) ($incidencia['estado']), ENT_QUOTES, 'UTF-8') ?></td>
                         <td><?= htmlspecialchars((string) ($incidencia['tecnico'] ?? 'No asignado'), ENT_QUOTES, 'UTF-8') ?></td>
+                        <td><a href="editar_incidencia.php?id=<?= htmlspecialchars((string) $incidencia['id'], ENT_QUOTES, 'UTF-8') ?>">Editar</a></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
