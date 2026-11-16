@@ -79,7 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Formulario de confirmación -->
         <form method="POST">
-            <input type="hidden" name="id" value="<?= htmlspecialchars((string) $incidencia['id'], ENT_QUOTES, 'UTF-8') ?>">
             <button type="submit">Eliminar</button>
         </form>
         <a href="index.php">Cancelar y volver al panel</a>
