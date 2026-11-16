@@ -74,12 +74,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Mensaje de confirmación -->
         <p>¿Estás seguro de que quieres eliminar la incidencia nº
             <strong><?= htmlspecialchars((string) $incidencia['id'], ENT_QUOTES, 'UTF-8') ?></strong>:
-            <strong><?= htmlspecialchars((string) $incidencia['titulo'], ENT_QUOTES, 'UTF-8', false) ?></strong>
+            <strong><?= htmlspecialchars((string) $incidencia['titulo'], ENT_QUOTES, 'UTF-8', false) ?></strong>?
         </p>
 
         <!-- Formulario de confirmación -->
         <form method="POST">
-            <input type="hidden" name="id" value="<?= htmlspecialchars((string) $incidencia['id'], ENT_QUOTES, 'UTF-8') ?>">
             <button type="submit">Eliminar</button>
         </form>
         <a href="index.php">Cancelar y volver al panel</a>
