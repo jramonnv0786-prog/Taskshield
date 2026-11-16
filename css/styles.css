@@ -1,0 +1,81 @@
+/* TaskShield - Hoja de estilos
+   Estilos mínimos para distinguir cada parte de la intranet. */
+
+/* Página */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #222;
+}
+
+/* Cabecera */
+header {
+    background-color: #1f3a5f;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+/* Contenido principal */
+main {
+    padding: 20px;
+}
+
+/* Tabla de incidencias */
+table {
+    border-collapse: collapse;
+    background-color: #fff;
+    margin-top: 10px;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #dde4ee;
+}
+
+/* Formularios */
+form {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px 0;
+    max-width: 500px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 6px 15px;
+}
+
+/* Avisos de éxito y errores de validación */
+.aviso {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 8px;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 8px 8px 8px 30px;
+}

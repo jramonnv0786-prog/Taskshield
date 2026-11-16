@@ -29,6 +29,7 @@ nueva_incidencia.php      ← alta de incidencias
 editar_incidencia.php     ← cambio de estado
 eliminar_incidencia.php   ← borrado controlado
 asignar_incidencia.php    ← asignación a un técnico (transacción)
+css/styles.css            ← hoja de estilos de todas las páginas
 doc/                      ← documentación técnica
 ```
 
