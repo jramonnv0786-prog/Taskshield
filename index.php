@@ -38,7 +38,7 @@ $asignada = filter_input(INPUT_GET, 'asignada', FILTER_VALIDATE_INT);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaskShield - Panel de Incidencias</title>
-
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
@@ -48,16 +48,16 @@ $asignada = filter_input(INPUT_GET, 'asignada', FILTER_VALIDATE_INT);
     <main>
         <!-- Mensajes de éxito -->
         <?php if ($creada): ?>
-            <p>Incidencia creada con éxito. ID: <?= htmlspecialchars((string) $creada, ENT_QUOTES, 'UTF-8') ?></p>
+            <p class="aviso">Incidencia creada con éxito. ID: <?= htmlspecialchars((string) $creada, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
         <?php if ($editada): ?>
-            <p>Incidencia actualizada con éxito. ID: <?= htmlspecialchars((string) $editada, ENT_QUOTES, 'UTF-8') ?></p>
+            <p class="aviso">Incidencia actualizada con éxito. ID: <?= htmlspecialchars((string) $editada, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
         <?php if ($eliminada): ?>
-            <p>Incidencia eliminada con éxito. ID: <?= htmlspecialchars((string) $eliminada, ENT_QUOTES, 'UTF-8') ?></p>
+            <p class="aviso">Incidencia eliminada con éxito. ID: <?= htmlspecialchars((string) $eliminada, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
         <?php if ($asignada): ?>
-            <p>Incidencia asignada con éxito. ID: <?= htmlspecialchars((string) $asignada, ENT_QUOTES, 'UTF-8') ?></p>
+            <p class="aviso">Incidencia asignada con éxito. ID: <?= htmlspecialchars((string) $asignada, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
         <a href="nueva_incidencia.php">Crear nueva incidencia</a>
         <table>
