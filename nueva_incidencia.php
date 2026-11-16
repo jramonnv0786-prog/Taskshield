@@ -36,11 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Si no hay errores, guardar la incidencia en la base de datos.
     if (empty($errores)) {
         try {
-            $stmt = $pdo->prepare(
+            $insercion = $pdo->prepare(
                 'INSERT INTO incidencias (titulo, descripcion, prioridad, email_cliente)
                  VALUES (:titulo, :descripcion, :prioridad, :email_cliente)'
             );
-            $stmt->execute([
+            $insercion->execute([
                 'titulo' => $titulo,
                 'descripcion' => $descripcion,
                 'prioridad' => $prioridad,

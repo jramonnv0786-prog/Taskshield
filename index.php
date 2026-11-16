@@ -10,15 +10,15 @@ require_once __DIR__ . '/conexion.php';
 
 // Consulta de las incidencias activas
 try {
-    $stmt = $pdo->prepare(
+    $consulta_incidencias = $pdo->prepare(
         'SELECT incidencias.id, incidencias.titulo, incidencias.prioridad, incidencias.estado,
                 tecnicos.nombre AS tecnico
          FROM incidencias
          LEFT JOIN tecnicos ON incidencias.tecnico_id = tecnicos.id
          WHERE incidencias.estado <> :estado'
     );
-    $stmt->execute(['estado' => 'Resuelta']);
-    $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC); // Obtener los resultados como un array asociativo
+    $consulta_incidencias->execute(['estado' => 'Resuelta']);
+    $incidencias = $consulta_incidencias->fetchAll(PDO::FETCH_ASSOC); // Obtener los resultados como un array asociativo
 } catch (PDOException $e) {
     error_log("Error al obtener las incidencias: " . $e->getMessage());
     die("Error al obtener las incidencias. Por favor, inténtalo más tarde.");

@@ -17,10 +17,10 @@ if (!$id) {
 
 // Comprobar que la incidencia existe
 try {
-    $stmt = $pdo->prepare('SELECT id, titulo, estado FROM incidencias WHERE id = :id');
-    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    $incidencia = $stmt->fetch(PDO::FETCH_ASSOC);
+    $consulta_incidencia = $pdo->prepare('SELECT id, titulo, estado FROM incidencias WHERE id = :id');
+    $consulta_incidencia->bindValue(':id', $id, PDO::PARAM_INT);
+    $consulta_incidencia->execute();
+    $incidencia = $consulta_incidencia->fetch(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     error_log("Error al obtener la incidencia: " . $e->getMessage());
     die("Error al obtener la incidencia. Por favor, inténtalo más tarde.");
@@ -42,10 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Actualizar la incidencia con una sentencia preparada
     try {
-        $stmt = $pdo->prepare('UPDATE incidencias SET estado = :estado WHERE id = :id');
-        $stmt->bindValue(':estado', $estado);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
+        $actualizacion = $pdo->prepare('UPDATE incidencias SET estado = :estado WHERE id = :id');
+        $actualizacion->bindValue(':estado', $estado);
+        $actualizacion->bindValue(':id', $id, PDO::PARAM_INT);
+        $actualizacion->execute();
     } catch (PDOException $e) {
         error_log("Error al actualizar la incidencia: " . $e->getMessage());
         die("Error al actualizar la incidencia. Por favor, inténtalo más tarde.");
