@@ -89,7 +89,7 @@ Seguimos el ciclo de un formulario: recuperar, validar, sanear, procesar y dar f
 
 1. Valida el `id` y comprueba que la incidencia existe (400 o 404 si no).
 2. Muestra una página de confirmación con el número y el título de la incidencia. El borrado solo se hace al enviar el formulario por POST, nunca desde un enlace GET: así un enlace o un buscador no pueden borrar datos por accidente.
-3. Ejecuta el DELETE y comprueba `rowCount()`. Si es mayor que 0, redirige con `?eliminada=`; si es 0, la incidencia ya no existía y lo indicamos con un mensaje.
+3. Ejecuta el DELETE y comprueba `rowCount()`. Si es mayor que 0, redirige con `?eliminada=`. Si es 0, la incidencia ha desaparecido entre la comprobación del paso 1 y el DELETE (por ejemplo, porque otra persona la ha borrado en ese instante) y lo indicamos con un mensaje. Es una red de seguridad: si la incidencia ya no existe al cargar la página, la comprobación del paso 1 responde antes con un 404 (caso de prueba 7).
 
 ### `asignar_incidencia.php` (transacción)
 
