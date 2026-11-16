@@ -32,6 +32,7 @@ Usamos InnoDB porque es el motor que admite transacciones y claves foráneas. Co
 | `editar_incidencia.php` | Cambio de estado (Pendiente / En Proceso / Resuelta). |
 | `eliminar_incidencia.php` | Borrado con página de confirmación y comprobación con `rowCount()`. |
 | `asignar_incidencia.php` | Asignación de una incidencia a un técnico mediante una transacción. |
+| `css/styles.css` | Hoja de estilos común: distingue la cabecera, la tabla, los formularios, los avisos de éxito (`.aviso`) y los errores (`.error`). |
 
 ### Separación entre lógica y vista
 
@@ -143,6 +144,7 @@ Los apuntes de ILERNA (DWS 1.1, 2.1, 3.1, 3.2 y 4.1) son nuestra fuente principa
 | `http_response_code()` | `editar_incidencia.php`, `eliminar_incidencia.php` | Manual de PHP. Devuelve el código HTTP correcto (400 o 404). |
 | Omitir el cierre `?>` en archivos solo PHP | `config.php`, `conexion.php` | Estándar PSR-12. Evita que un espacio o salto de línea tras el cierre se envíe al navegador. |
 | SQL de definición (`CREATE TABLE`, `ENUM`, `CHECK`, `FOREIGN KEY`) y `LEFT JOIN` | `schema.sql`, `index.php` | Bases de Datos de 1º y documentación de MariaDB. |
+| Hoja de estilos CSS | `css/styles.css` y el `<link>` de cada página | Lenguajes de Marcas de 1º. |
 
 ### Diferencias intencionadas con los apuntes
 
