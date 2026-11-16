@@ -54,7 +54,7 @@ $asignada = filter_input(INPUT_GET, 'asignada', FILTER_VALIDATE_INT);
             <p>Incidencia actualizada con éxito. ID: <?= htmlspecialchars((string) $editada, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
         <?php if ($eliminada): ?>
-            <p> Incidencia Eliminada con éxito. ID: <?= htmlspecialchars((string) $eliminada, ENT_QUOTES, 'UTF-8') ?></p>
+            <p>Incidencia eliminada con éxito. ID: <?= htmlspecialchars((string) $eliminada, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
         <?php if ($asignada): ?>
             <p>Incidencia asignada con éxito. ID: <?= htmlspecialchars((string) $asignada, ENT_QUOTES, 'UTF-8') ?></p>
