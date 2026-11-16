@@ -24,10 +24,11 @@ try {
     die("Error al obtener las incidencias. Por favor, inténtalo más tarde.");
 }
 
-// Avisos de alta, edición y eliminación (ids recibidos por la URL)
+// Avisos de alta, edición, eliminación y asignación (ids recibidos por la URL)
 $creada = filter_input(INPUT_GET, 'creada', FILTER_VALIDATE_INT);
 $editada = filter_input(INPUT_GET, 'editada', FILTER_VALIDATE_INT);
 $eliminada = filter_input(INPUT_GET, 'eliminada', FILTER_VALIDATE_INT);
+$asignada = filter_input(INPUT_GET, 'asignada', FILTER_VALIDATE_INT);
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +55,9 @@ $eliminada = filter_input(INPUT_GET, 'eliminada', FILTER_VALIDATE_INT);
         <?php endif; ?>
         <?php if ($eliminada): ?>
             <p> Incidencia Eliminada con éxito. ID: <?= htmlspecialchars((string) $eliminada, ENT_QUOTES, 'UTF-8') ?></p>
+        <?php endif; ?>
+        <?php if ($asignada): ?>
+            <p>Incidencia asignada con éxito. ID: <?= htmlspecialchars((string) $asignada, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
         <a href="nueva_incidencia.php">Crear nueva incidencia</a>
         <table>
@@ -82,6 +86,7 @@ $eliminada = filter_input(INPUT_GET, 'eliminada', FILTER_VALIDATE_INT);
                         <td>
                             <a href="editar_incidencia.php?id=<?= htmlspecialchars((string) $incidencia['id'], ENT_QUOTES, 'UTF-8') ?>">Editar</a>
                             <a href="eliminar_incidencia.php?id=<?= htmlspecialchars((string) $incidencia['id'], ENT_QUOTES, 'UTF-8') ?>">Eliminar</a>
+                            <a href="asignar_incidencia.php?id=<?= htmlspecialchars((string) $incidencia['id'], ENT_QUOTES, 'UTF-8') ?>">Asignar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
