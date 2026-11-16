@@ -10,23 +10,24 @@ require_once __DIR__ . '/conexion.php';
 
 // Consulta de las incidencias activas
 try {
-    $stmt = $pdo->prepare(
+    $consulta_incidencias = $pdo->prepare(
         'SELECT incidencias.id, incidencias.titulo, incidencias.prioridad, incidencias.estado,
                 tecnicos.nombre AS tecnico
          FROM incidencias
          LEFT JOIN tecnicos ON incidencias.tecnico_id = tecnicos.id
          WHERE incidencias.estado <> :estado'
     );
-    $stmt->execute(['estado' => 'Resuelta']);
-    $incidencias = $stmt->fetchAll(PDO::FETCH_ASSOC); // Obtener los resultados como un array asociativo
+    $consulta_incidencias->execute(['estado' => 'Resuelta']);
+    $incidencias = $consulta_incidencias->fetchAll(PDO::FETCH_ASSOC); // Obtener los resultados como un array asociativo
 } catch (PDOException $e) {
     error_log("Error al obtener las incidencias: " . $e->getMessage());
     die("Error al obtener las incidencias. Por favor, inténtalo más tarde.");
 }
 
-// Avisos de alta y edición (ids recibidos por la URL)
+// Avisos de alta, edición y eliminación (ids recibidos por la URL)
 $creada = filter_input(INPUT_GET, 'creada', FILTER_VALIDATE_INT);
 $editada = filter_input(INPUT_GET, 'editada', FILTER_VALIDATE_INT);
+$eliminada = filter_input(INPUT_GET, 'eliminada', FILTER_VALIDATE_INT);
 ?>
 
 <!DOCTYPE html>
@@ -44,19 +45,23 @@ $editada = filter_input(INPUT_GET, 'editada', FILTER_VALIDATE_INT);
         <h1>Panel de Incidencias</h1>
     </header>
     <main>
+        <!-- Mensajes de éxito -->
         <?php if ($creada): ?>
             <p>Incidencia creada con éxito. ID: <?= htmlspecialchars((string) $creada, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
         <?php if ($editada): ?>
             <p>Incidencia actualizada con éxito. ID: <?= htmlspecialchars((string) $editada, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
+        <?php if ($eliminada): ?>
+            <p> Incidencia Eliminada con éxito. ID: <?= htmlspecialchars((string) $eliminada, ENT_QUOTES, 'UTF-8') ?></p>
+        <?php endif; ?>
         <a href="nueva_incidencia.php">Crear nueva incidencia</a>
         <table>
-            <!-- Agregar un caption para accesibilidad -->
+            <!-- caption: título de la tabla (accesibilidad) -->
             <caption>Incidencias Activas</caption>
             <thead>
                 <tr>
-                    <!-- Agregar scope a los encabezados de columna para accesibilidad -->
+                    <!-- scope="col": cada th encabeza una columna (accesibilidad) -->
                     <th scope="col">ID</th>
                     <th scope="col">Título</th>
                     <th scope="col">Prioridad</th>
@@ -74,7 +79,10 @@ $editada = filter_input(INPUT_GET, 'editada', FILTER_VALIDATE_INT);
                         <td><?= htmlspecialchars((string) ($incidencia['prioridad']), ENT_QUOTES, 'UTF-8') ?></td>
                         <td><?= htmlspecialchars((string) ($incidencia['estado']), ENT_QUOTES, 'UTF-8') ?></td>
                         <td><?= htmlspecialchars((string) ($incidencia['tecnico'] ?? 'No asignado'), ENT_QUOTES, 'UTF-8') ?></td>
-                        <td><a href="editar_incidencia.php?id=<?= htmlspecialchars((string) $incidencia['id'], ENT_QUOTES, 'UTF-8') ?>">Editar</a></td>
+                        <td>
+                            <a href="editar_incidencia.php?id=<?= htmlspecialchars((string) $incidencia['id'], ENT_QUOTES, 'UTF-8') ?>">Editar</a>
+                            <a href="eliminar_incidencia.php?id=<?= htmlspecialchars((string) $incidencia['id'], ENT_QUOTES, 'UTF-8') ?>">Eliminar</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
